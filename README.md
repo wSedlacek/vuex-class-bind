@@ -1,4 +1,4 @@
-# vuex-class-state2way
+# vuex-class-bind
 
 TypeScript decorator to create getters/setters for a Vuex state.
 
@@ -15,27 +15,27 @@ Check [vuex-class](https://github.com/ktsn/vuex-class) repository for a lot more
 ## Installation
 
 ```bash
-$ npm install --save vuex-class-state2way
+$ npm install --save vuex-class-bind
 # or
-$ yarn add vuex-class-state2way
+$ yarn add vuex-class-bind
 ```
 
 ## Usage
 
-* Get `variable_name` from the state, and commit `"mutation name"` to update this variable in the state
+* Get `variable_name` from the state, and commit `"action name"` to update this variable in the state
 ```ts
-@State2Way("mutation name") variable_name
+@Bind("action name") variable_name
 ```
 
-* Get `variable_name` from the state and set its value to the variable `other_name`, and commit `"mutation name"` to update this variable in the state
+* Get `variable_name` from the state and set its value to the variable `other_name`, and commit `"action name"` to update this variable in the state
 ```ts
-@State2Way("mutation name", "variable_name") other_name
+@Bind("action name", "variable_name") other_name
 ```
 
 * To get a deep value, you can do both:
 ```ts
-@State2Way("mutation name", state => state.foo.bar) fooBar // you get type checking
-@State2Way("mutation name", "foo.bar") fooBar
+@Bind("action name", state => state.foo.bar) fooBar // you get type checking
+@Bind("action name", "foo.bar") fooBar
 ```
 
 ## Example
@@ -43,13 +43,13 @@ $ yarn add vuex-class-state2way
 ```ts
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { State2Way } from 'vuex-class-state2way'
+import { Bind } from 'vuex-class-bind'
 
 @Component
 export class Comp extends Vue {
-    @State2Way('updateFoo', 'foo') stateFoo
-    @State2Way('updateBar') bar
-    @State2Way('updateFooBar', 'foobar.example') stateFooBarExample
-    @State2Way('updateFooBar', state => state.foobar.example) stateFooBarExemple2
+    @Bind('updateFoo', 'foo') stateFoo
+    @Bind('updateBar') bar
+    @Bind('updateFooBar', 'foobar.example') stateFooBarExample
+    @Bind('updateFooBar', state => state.foobar.example) stateFooBarExemple2
 }
 ```
