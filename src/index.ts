@@ -22,7 +22,7 @@ export function Bind(action: string, stateVariable?: string|functionGetState): a
                 }
             },
             set(val) {
-                (this as any).$store.commit(action, val)
+                (this as any).$store.dispatch(action, val)
             }
         }
     })
