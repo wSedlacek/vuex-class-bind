@@ -7,7 +7,7 @@ function getDeepValue(st:string, obj:any) {
 }
 type functionGetState = (state:any) => any
 
-export function State2Way(mutation: string, stateVariable?: string|functionGetState): any {
+export function Bind(action: string, stateVariable?: string|functionGetState): any {
     return createDecorator((componentOptions, k) => {
         if(!componentOptions.computed) {
             componentOptions.computed = {}
@@ -22,7 +22,7 @@ export function State2Way(mutation: string, stateVariable?: string|functionGetSt
                 }
             },
             set(val) {
-                (this as any).$store.commit(mutation, val)
+                (this as any).$store.commit(action, val)
             }
         }
     })
