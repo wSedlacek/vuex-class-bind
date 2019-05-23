@@ -1,13 +1,13 @@
 {
   "name": "vuex-class-bind",
-  "author": "scleriot",
+  "author": "scleriot, modified by wSedlacek",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript decorator to create getters/setters for a Vuex state.",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scleriot/vuex-class-state2way"
+    "url": "https://github.com/wSedlacek/vuex-class-bind"
   },
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -18,9 +18,9 @@
     "lib"
   ],
   "devDependencies": {
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3",
-    "vue": "^2.6.6",
-    "vue-class-component": "^6.3.2"
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.1.0"
   }
 }

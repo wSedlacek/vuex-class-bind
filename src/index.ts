@@ -31,7 +31,7 @@ export function Bind(
         }
       },
       set(val) {
-        const correctedAction = action.replace("/", ".");
+        const correctedAction = action.replace(".", "/");
         (this as any).$store.dispatch(correctedAction, val);
       },
     };
