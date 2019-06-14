@@ -2,7 +2,7 @@
   "name": "vuex-class-bind",
   "author": "scleriot, modified by wSedlacek",
   "license": "MIT",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "TypeScript decorator to create getters/setters for a Vuex state.",
   "main": "lib/index.js",
   "repository": {

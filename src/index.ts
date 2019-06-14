@@ -1,6 +1,14 @@
 import { createDecorator } from "vue-class-component";
 
-export function Bind(getter: string, action: string): any {
+function capitalize(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function Bind(binding: string): any {
+  const parsed = binding.replace(".", "/").split("/");
+  const getter = `${parsed[0]}/get${capitalize(parsed[1])}`;
+  const setter = `${parsed[0]}/set${capitalize(parsed[1])}`;
+
   return createDecorator((componentOptions, k) => {
     if (!componentOptions.computed) {
       componentOptions.computed = {};
@@ -8,12 +16,10 @@ export function Bind(getter: string, action: string): any {
 
     componentOptions.computed[k] = {
       get() {
-        const correctedGetter = getter.replace(".", "/");
-        return (this as any).$store.getters[correctedGetter];
+        return (this as any).$store.getters[getter];
       },
       set(val) {
-        const correctedAction = action.replace(".", "/");
-        (this as any).$store.dispatch(correctedAction, val);
+        (this as any).$store.dispatch(setter, val);
       },
     };
   });
