@@ -22,30 +22,23 @@ $ yarn add vuex-class-bind
 
 ## Usage
 
-- Get `variable_name` from the state, and commit `"action name"` to update this variable in the state
-
-```ts
-@Bind("module/action") variable_name
-```
-
 - Get `variable_name` from the state and set its value to the variable `other_name`, and commit `"action name"` to update this variable in the state
 
 ```ts
-@Bind("module/action", "module/state") other_name
+@Bind("module/getter", "module/action") other_name
 ```
 
 - To get a deep value, you can do both:
 
 ```ts
-@Bind("module/action", state => state.foo.bar) fooBar // you get type checking
-@Bind("module/action", "module/state") fooBar
+@Bind("module/getter", "module/action") fooBar
 ```
 
 - New in 1.0.2 (fixed in 1.0.3), Use periods or slashes!
 
 ```ts
-@Bind("module/action", "module/state") fooBar
-@Bind("module.action", "module.state") fooBar
+@Bind("module/getter", "module/action") fooBar
+@Bind("module.getter", "module.action") fooBar
 ```
 
 ## Example
@@ -57,10 +50,8 @@ import { Bind } from 'vuex-class-bind';
 
 @Component
 export class Comp extends Vue {
-  @Bind('updateFoo', 'foo') stateFoo;
-  @Bind('updateBar') bar;
-  @Bind('updateFooBar', 'foobar.example') stateFooBarExample;
-  @Bind('updateFooBar', state => state.foobar.example) stateFooBarExemple2;
+  @Bind('getFoo', 'setFoo') stateFoo;
+  @Bind('foobar/getFoo', 'foobar.setFoo') stateFooBarExample;
 }
 ```
 
@@ -68,3 +59,8 @@ export class Comp extends Vue {
 
 Just a fork of https://github.com/scleriot/vuex-class-state2way
 Thank you for your awesome code scleriot! Hopifully my fork helps people who want to access actions rather then muations.
+
+## Breaking Changes in 1.0.6
+
+- Replaced State with Getter
+- Changed order from Action, State to Getter, Action.

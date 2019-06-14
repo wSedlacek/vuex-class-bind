@@ -1,19 +1,6 @@
 import { createDecorator } from "vue-class-component";
 
-function getDeepValue(st: string, obj: any) {
-  return st
-    .replace(/\[([^\]]+)]/g, ".$1")
-    .split(".")
-    .reduce(function(o, p) {
-      return o[p];
-    }, obj);
-}
-type functionGetState = (state: any) => any;
-
-export function Bind(
-  action: string,
-  stateVariable?: string | functionGetState,
-): any {
+export function Bind(getter: string, action: string): any {
   return createDecorator((componentOptions, k) => {
     if (!componentOptions.computed) {
       componentOptions.computed = {};
@@ -21,14 +8,8 @@ export function Bind(
 
     componentOptions.computed[k] = {
       get() {
-        if (typeof stateVariable === "string") {
-          const correctedStateVariable = stateVariable.replace("/", ".");
-          return correctedStateVariable
-            ? getDeepValue(correctedStateVariable, (this as any).$store.state)
-            : (this as any).$store.state[k];
-        } else if (stateVariable) {
-          return stateVariable((this as any).$store.state);
-        }
+        const correctedGetter = getter.replace(".", "/");
+        return (this as any).$store.getters[correctedGetter];
       },
       set(val) {
         const correctedAction = action.replace(".", "/");
