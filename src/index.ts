@@ -5,9 +5,17 @@ function capitalize(string: string) {
 }
 
 export function Bind(binding: string): any {
+  let getter: string;
+  let setter: string;
+
   const parsed = binding.replace(".", "/").split("/");
-  const getter = `${parsed[0]}/get${capitalize(parsed[1])}`;
-  const setter = `${parsed[0]}/set${capitalize(parsed[1])}`;
+  if (parsed.length == 2) {
+    getter = `${parsed[0]}/get${capitalize(parsed[1])}`;
+    setter = `${parsed[0]}/set${capitalize(parsed[1])}`;
+  } else {
+    getter = `get${capitalize(parsed[0])}`;
+    setter = `set${capitalize(parsed[0])}`;
+  }
 
   return createDecorator((componentOptions, k) => {
     if (!componentOptions.computed) {

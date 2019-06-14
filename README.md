@@ -25,14 +25,20 @@ $ yarn add vuex-class-bind
 - Creates setters and getters for var_name using the getVar_name from vuex getters and setVar_name from vuex actions.
 
 ```ts
-@Bind("module/var_name") other_name
+@Bind(`var_name`) varName
+```
+
+- Use with modules too.
+
+```ts
+@Bind(`module/var_name`) varName
 ```
 
 - New in 1.0.2 (fixed in 1.0.3), Use periods or slashes!
 
 ```ts
-@Bind("module/var_name") fooBar
-@Bind("module.var_name") fooBar
+@Bind("module/fooBar") fooBar
+@Bind("module.fooBar") fooBar2
 ```
 
 ## Example
@@ -44,8 +50,8 @@ import { Bind } from 'vuex-class-bind';
 
 @Component
 export class Comp extends Vue {
-  @Bind('foo') stateFoo;
-  @Bind('foobar/foo') stateFooBarExample;
+  @Bind('foo') foo;
+  @Bind('foobar/foo') fooBarFoo;
 }
 ```
 
